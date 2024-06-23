@@ -1,0 +1,40 @@
+Gesture Recognition Flask API
+
+This project integrates a pre-trained gesture recognition model into a Flask backend API. The API processes input gesture data and returns the recognized sign.
+gesture_project/
+├── app.py
+├── models/
+│   └── gesture_model.py
+│   └── islr-fp16-192-8-seed42-fold0-best.h5
+├── src/
+│   └── backbone.py
+│   └── landmarks_extraction.py
+│   └── config.py
+│   └── utils.py
+│   └── sign_to_prediction_index_map.json
+├── requirements.txt
+├── README
+├── venv/
+
+
+Requirements
+
+Ensure you have Python 3.6+ installed. Create a virtual environment and install dependencies using the provided requirements.txt.
+
+Components:
+
+gesture.py : contains the pre-trained model using TensorFlow
+/predict : endpoint that accepts JSON input, configured to handle POST requests and process input data
+request.json : used to retreive data,
+np.frombuffer : processes the frame data 
+    - added exception handling to manage possible errors during landmarks extraction
+
+Testing
+
+Use curl or Postman to send a POST request to your /predict endpoint:
+Curl:
+    curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d '{"frame": "your_encoded_frame_data_here"}'
+Postman: 
+    Set the request type to POST.
+    Set the URL to http://127.0.0.1:5000/predict.
+    Add a JSON body with a sample frame data.
